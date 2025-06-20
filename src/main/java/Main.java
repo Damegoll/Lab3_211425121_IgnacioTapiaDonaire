@@ -1,6 +1,13 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Que pasa larva");
+        List<Player_21142512_IgnacioTapia> jugadores = new ArrayList<>();
+        Game_21142512_IgnacioTapia juego = new Game_21142512_IgnacioTapia(
+                jugadores,150000,2,0,5,4,2
+        );
+        MenuGame menu = new MenuGame(juego);
+        menu.menuJuego();
     }
-    // todo lo que puedo decir, es que va a estar chochino
 }

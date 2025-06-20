@@ -1,6 +1,6 @@
 import java.util.List;
 
-public class Game_21142512_IgnacioTapia {
+public class Game_21142512_IgnacioTapia{
     private List<Player_21142512_IgnacioTapia> listaJugadores;
     private int dineroBanco;
     private int numeroDados;
