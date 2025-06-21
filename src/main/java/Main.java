@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Clase Main de Capitalia
+ * literal inicializa el juego en si
+ */
 public class Main {
     public static void main(String[] args) {
         List<Player_21142512_IgnacioTapia> jugadores = new ArrayList<>();

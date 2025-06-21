@@ -1,8 +1,14 @@
 import java.util.Scanner;
-
+/**
+ * Interfaz del menu del juego
+ * basicamente el menu en si
+ */
 public class MenuGame implements Menu {
     private Game_21142512_IgnacioTapia juego;
-
+    /**
+     * Constructor del menu del juego
+     * @param juego inicializa un nuevo juego desde 0
+     */
     public MenuGame(Game_21142512_IgnacioTapia juego) {
         this.juego = juego;
     }
