@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 /**
  * Clase del juego en Capitalia
@@ -6,6 +8,10 @@ import java.util.List;
  */
 public class Game_21142512_IgnacioTapia{
     private List<Player_21142512_IgnacioTapia> listaJugadores;
+    private List<Property_21142512_IgnacioTapia> listaPropiedades;
+    private List<Card_21142512_IgnacioTapia> listaCartas;
+    private List<CasillasEspeciales> casillasEspeciales;
+    private Board_21142512_IgnacioTapia tablero;
     private int dineroBanco;
     private int numeroDados;
     private int turnoActual;
@@ -32,6 +38,36 @@ public class Game_21142512_IgnacioTapia{
         this.tasaImpuesto = tasaImpuesto;
         this.maximoCasas = maximoCasas;
         this.maximoHoteles = maximoHoteles;
+    }
+    /**
+     * carga los datos iniciales del juego
+     * inicializa la lista de propiedades, cartas y casillas especiales
+     * agrega los datos de cada una respectivamente
+     */
+    public void cargarDatosIniciales() {
+        listaPropiedades = new ArrayList<>();
+        listaCartas = new LinkedList<>();
+        casillasEspeciales = new ArrayList<>();
+
+        Property_21142512_IgnacioTapia prop1 = new Property_21142512_IgnacioTapia(1,1,
+                "prop1",1500,200,"Banco",0,false);
+        Property_21142512_IgnacioTapia prop2 = new Property_21142512_IgnacioTapia(2,2,
+                "prop2",1600,210,"Banco",0,false);
+        Property_21142512_IgnacioTapia prop3 = new Property_21142512_IgnacioTapia(3,3,
+                "prop3",1700,220,"Banco",0,false);
+
+        agregarPropiedad(prop1);
+        agregarPropiedad(prop2);
+        agregarPropiedad(prop3);
+
+        tablero = new Board_21142512_IgnacioTapia(listaPropiedades,listaCartas,casillasEspeciales);
+    }
+    /**
+     * agrega las propiedades a la lista de propiedades del juego, recibe un objeto propiedad para ello
+     * @param propiedad el objeto propiedad creado dentro del juego
+     */
+    public void agregarPropiedad(Property_21142512_IgnacioTapia propiedad) {
+        listaPropiedades.add(propiedad);
     }
     /**
      * getter de la lista de jugadores dentro del juego

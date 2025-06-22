@@ -4,6 +4,7 @@
  */
 public class Property_21142512_IgnacioTapia {
     private int idProp;
+    private int posProp;
     private String nombreProp;
     private int precio;
     private int renta;
@@ -14,6 +15,7 @@ public class Property_21142512_IgnacioTapia {
      * Constructor de Property
      *
      * @param idProp id de la propiedad en cuestion
+     * @param posProp indica la posicion de la propiedad en el tablero
      * @param nombreProp nombre de la propiedad en si
      * @param precio precio al que se va a comprar
      * @param renta renta la cual va a cobrar de caer un jugador en ella
@@ -21,9 +23,10 @@ public class Property_21142512_IgnacioTapia {
      * @param casas cantidad total de casas en la propiedad
      * @param estaHipotecada ver si esta o no hipotecada la propiedad
      */
-    public Property_21142512_IgnacioTapia(int idProp,String nombreProp,int precio,int renta,String duenio,
+    public Property_21142512_IgnacioTapia(int idProp,int posProp,String nombreProp,int precio,int renta,String duenio,
                                           int casas,boolean estaHipotecada){
         this.idProp = idProp;
+        this.posProp = posProp;
         this.nombreProp = nombreProp;
         this.precio = precio;
         this.renta = renta;
@@ -36,6 +39,11 @@ public class Property_21142512_IgnacioTapia {
      * @return id unico de la propiedad
      */
     public int getIdProp() { return idProp; }
+    /**
+     * getter de la posicion de la propiedad en el tablero
+     * @return posicion de la propiedad
+     */
+    public int getPosProp() { return posProp; }
     /**
      * getter del Nombre de la propiedad
      * @return nombre especifico de la propiedad
