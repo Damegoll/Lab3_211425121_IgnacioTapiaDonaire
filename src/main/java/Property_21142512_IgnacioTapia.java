@@ -23,7 +23,7 @@ public class Property_21142512_IgnacioTapia {
      * @param casas cantidad total de casas en la propiedad
      * @param estaHipotecada ver si esta o no hipotecada la propiedad
      */
-    public Property_21142512_IgnacioTapia(int idProp,int posProp,String nombreProp,int precio,int renta,String duenio,
+    public Property_21142512_IgnacioTapia(int idProp,String nombreProp,int posProp,int precio,int renta,String duenio,
                                           int casas,boolean estaHipotecada){
         this.idProp = idProp;
         this.posProp = posProp;

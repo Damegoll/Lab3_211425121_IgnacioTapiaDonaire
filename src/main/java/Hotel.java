@@ -6,15 +6,16 @@ public class Hotel extends Property_21142512_IgnacioTapia{
      * los hoteles en si
      * @param idProp id de la propiedad a agregar un hotel
      * @param nombreProp nombre de la propiedad
+     * @param posicionPropiedad posicion de la propiedad en el tablero
      * @param precio precio de la propiedad
      * @param renta renta de la propiedad
      * @param duenio duenio de la propiedad
      * @param casas casas totales de la propiedad (deberia ser el maximo)
      * @param estaHipotecada si esta hipotecada o no (no deberia)
      */
-    public Hotel(int idProp,String nombreProp,int precio,int renta,String duenio,
+    public Hotel(int idProp,String nombreProp,int posicionPropiedad,int precio,int renta,String duenio,
                  int casas,boolean estaHipotecada) {
-        super(idProp,nombreProp,precio,renta,duenio,casas,estaHipotecada);
+        super(idProp,nombreProp,posicionPropiedad,precio,renta,duenio,casas,estaHipotecada);
         //dato a agregar, inicializa en 0
         this.cantidadHoteles = 0;
     }

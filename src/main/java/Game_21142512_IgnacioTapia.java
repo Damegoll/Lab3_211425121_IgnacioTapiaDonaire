@@ -12,6 +12,7 @@ public class Game_21142512_IgnacioTapia{
     private List<Card_21142512_IgnacioTapia> listaCartas;
     private List<CasillasEspeciales> casillasEspeciales;
     private Board_21142512_IgnacioTapia tablero;
+    private Player_21142512_IgnacioTapia jugador;
     private int dineroBanco;
     private int numeroDados;
     private int turnoActual;
@@ -49,12 +50,12 @@ public class Game_21142512_IgnacioTapia{
         listaCartas = new LinkedList<>();
         casillasEspeciales = new ArrayList<>();
 
-        Property_21142512_IgnacioTapia prop1 = new Property_21142512_IgnacioTapia(1,1,
-                "prop1",1500,200,"Banco",0,false);
-        Property_21142512_IgnacioTapia prop2 = new Property_21142512_IgnacioTapia(2,2,
-                "prop2",1600,210,"Banco",0,false);
-        Property_21142512_IgnacioTapia prop3 = new Property_21142512_IgnacioTapia(3,3,
-                "prop3",1700,220,"Banco",0,false);
+        Property_21142512_IgnacioTapia prop1 = new Property_21142512_IgnacioTapia(1,"prop1",
+                1,1500,200,"Banco",0,false);
+        Property_21142512_IgnacioTapia prop2 = new Property_21142512_IgnacioTapia(2,"prop2",
+                2,1600,210,"Banco",0,false);
+        Property_21142512_IgnacioTapia prop3 = new Property_21142512_IgnacioTapia(3,"prop3",
+                3,1700,220,"Banco",0,false);
 
         agregarPropiedad(prop1);
         agregarPropiedad(prop2);
@@ -68,6 +69,16 @@ public class Game_21142512_IgnacioTapia{
      */
     public void agregarPropiedad(Property_21142512_IgnacioTapia propiedad) {
         listaPropiedades.add(propiedad);
+    }
+    public void agregarJugador(Player_21142512_IgnacioTapia jugadorAgregado) {
+        listaJugadores.add(jugadorAgregado);
+    }
+    /**
+     * devuelve el nombre del jugador actual, osea el que esta jugando en ese momento
+     * @return nombre del jugador actualmente en juego
+     */
+    public String getJugadorActual(){
+        return listaJugadores.get(turnoActual).getNombre();
     }
     /**
      * getter de la lista de jugadores dentro del juego

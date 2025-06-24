@@ -34,6 +34,18 @@ public class Player_21142512_IgnacioTapia {
         this.enCarcel = newenCarcel;
         this.totalCartasSalirCarcel = newtotalCartasSalirCarcel;
     }
+
+    @Override
+    public String toString() {
+        return "Datos del jugador["+"id: "+id+
+                ",nombre: "+nombre+
+                ",dinero: "+dinero+
+                ",propiedades: "+propiedades+
+                ",posicion: "+posicion+
+                ",en la carcel? "+enCarcel+
+                ",cartas para salir de la carcel: "+totalCartasSalirCarcel+"]"+"\n";
+    }
+
     /**
      * getter de la Id del jugador
      * @return id unica del jugador
