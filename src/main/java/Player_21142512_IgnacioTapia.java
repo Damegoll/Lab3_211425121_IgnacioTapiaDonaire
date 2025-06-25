@@ -81,5 +81,11 @@ public class Player_21142512_IgnacioTapia {
      * @return cantidad de cartas de salir de la carcel en posecion
      */
     public int getTotalCartasSalirCarcel() { return totalCartasSalirCarcel; }
+
+    /**
+     * setter que cambia la posicion del jugador
+     * @param nuevaPosicion nueva posicion del jugador
+     */
+    public void setPosicion(int nuevaPosicion) { this.posicion = nuevaPosicion; }
 }
 

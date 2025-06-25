@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 /**
  * Clase del juego en Capitalia
  * contiene lo necesario para poder inicializar
@@ -77,8 +78,31 @@ public class Game_21142512_IgnacioTapia{
      * devuelve el nombre del jugador actual, osea el que esta jugando en ese momento
      * @return nombre del jugador actualmente en juego
      */
-    public String getJugadorActual(){
-        return listaJugadores.get(turnoActual).getNombre();
+    public Player_21142512_IgnacioTapia getJugadorActual(){
+        return listaJugadores.get(turnoActual);
+    }
+
+    /**
+     * funcion que lanza los dados dentro del juego, depende del total de dados en numeroDados
+     * @return suma total del valor de los dados
+     */
+    public int lanzarDados(){
+        Random random = new Random();
+        int sumaDados = 0;
+        for (int i=0;i<numeroDados;i++){
+            sumaDados += random.nextInt(6)+1;
+        }
+        return sumaDados;
+    }
+
+    /**
+     * funcion para mover al jugador dependiendo del valor obtenido por los n dados
+     * @param valorDados valor total de los dados lanzados
+     */
+    public void moverJugador(int valorDados){
+        Player_21142512_IgnacioTapia jugadorMover = getJugadorActual();
+        int nuevaPos = jugadorMover.getPosicion() + valorDados;
+        jugadorMover.setPosicion(nuevaPos);
     }
     /**
      * getter de la lista de jugadores dentro del juego
