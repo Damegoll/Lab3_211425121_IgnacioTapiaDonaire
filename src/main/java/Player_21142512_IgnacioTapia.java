@@ -87,5 +87,14 @@ public class Player_21142512_IgnacioTapia {
      * @param nuevaPosicion nueva posicion del jugador
      */
     public void setPosicion(int nuevaPosicion) { this.posicion = nuevaPosicion; }
+
+    /**
+     * funcion que permite comprar propiedades y añadirlas a la lista del jugador
+     * @param propiedadCompra propiedad a comprar por el jugador
+     */
+    public void comprarPropiedad(Property_21142512_IgnacioTapia propiedadCompra){
+        dinero -= propiedadCompra.getPrecio();
+        propiedades.add(propiedadCompra);
+    }
 }
 

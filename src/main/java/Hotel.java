@@ -26,7 +26,9 @@ public class Hotel extends Property_21142512_IgnacioTapia{
     public void aumentarHoteles() { cantidadHoteles++; }
     /**
      * getter de la cantidad de hoteles ya construidos
+     * sobreescribe a getCantidadHoteles en caso de tener 1 o más
      * @return cantidad de hoteles de la propiedad
      */
+    @Override
     public int getCantidadHoteles() { return cantidadHoteles; }
 }

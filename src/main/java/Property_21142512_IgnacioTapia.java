@@ -69,9 +69,28 @@ public class Property_21142512_IgnacioTapia {
      * @return la cantidad de casas
      */
     public int getCasas() { return casas; }
+
+    /**
+     * basicamente caso base de la cantidad de hoteles
+     * @return 0 si no encuentra hoteles en la subclase
+     */
+    public int getCantidadHoteles() { return 0; }
     /**
      * getter de si esta Hipotecada o no la propiedad
      * @return si esta o no hipetecada
      */
     public boolean isEstaHipotecada() { return estaHipotecada; }
+
+    /**
+     * calcula la renta de la propiedad dependiendo del total de casas y hoteles
+     * @param propiedadRenta propiedad a la que se le calcula dicha renta
+     * @return monto total de la renta
+     */
+    public double calcularRentaPropiedad(Property_21142512_IgnacioTapia propiedadRenta){
+        double montoRenta = 0;
+        montoRenta += propiedadRenta.getRenta();
+        montoRenta += 0.2 * propiedadRenta.getCasas();
+        montoRenta += 2 * getCantidadHoteles();
+        return montoRenta;
+    }
 }
