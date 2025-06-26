@@ -89,6 +89,12 @@ public class Player_21142512_IgnacioTapia {
     public void setPosicion(int nuevaPosicion) { this.posicion = nuevaPosicion; }
 
     /**
+     * setter para el dinero del jugador
+     * @param nuevoDinero nueva cantidad de dinero
+     */
+    public void setDinero(int nuevoDinero) { this.dinero = nuevoDinero; }
+
+    /**
      * funcion que permite comprar propiedades y añadirlas a la lista del jugador
      * @param propiedadCompra propiedad a comprar por el jugador
      */

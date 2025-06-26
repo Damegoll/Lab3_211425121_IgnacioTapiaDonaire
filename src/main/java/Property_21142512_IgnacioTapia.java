@@ -82,6 +82,12 @@ public class Property_21142512_IgnacioTapia {
     public boolean isEstaHipotecada() { return estaHipotecada; }
 
     /**
+     * setter para las casas
+     * @param cantidadCasas cantidad de casas a colocar
+     */
+    public void setCasas(int cantidadCasas) { this.casas = cantidadCasas; }
+
+    /**
      * calcula la renta de la propiedad dependiendo del total de casas y hoteles
      * @param propiedadRenta propiedad a la que se le calcula dicha renta
      * @return monto total de la renta
@@ -92,5 +98,18 @@ public class Property_21142512_IgnacioTapia {
         montoRenta += 0.2 * propiedadRenta.getCasas();
         montoRenta += 2 * getCantidadHoteles();
         return montoRenta;
+    }
+
+    /**
+     * calcula la renta del total de propiedades del jugador
+     * @param jugadorJuego el jugador como tal
+     * @return valor total de la renta entre todas las propiedades
+     */
+    public double calcularRentaJugador(Player_21142512_IgnacioTapia jugadorJuego) {
+        double rentaTotalJugador = 0;
+        for (Property_21142512_IgnacioTapia propiedades : jugadorJuego.getPropiedades()){
+            rentaTotalJugador += propiedades.calcularRentaPropiedad(propiedades);
+        }
+        return rentaTotalJugador;
     }
 }

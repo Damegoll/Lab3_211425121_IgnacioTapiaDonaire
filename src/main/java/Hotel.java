@@ -1,5 +1,6 @@
 public class Hotel extends Property_21142512_IgnacioTapia{
     private int cantidadHoteles;
+    private Game_21142512_IgnacioTapia juegoBase;
     /**
      * Constructor ya conocido de prop, al crear un hotel es preferible
      * mantener todo lo ya conocido por Property y solamente agregar
@@ -31,4 +32,33 @@ public class Hotel extends Property_21142512_IgnacioTapia{
      */
     @Override
     public int getCantidadHoteles() { return cantidadHoteles; }
+
+    /**
+     * funcion que construye un hotel en la propiedad
+     * dada la naturalidad de crear Hotel como una herencia, es necesario
+     * cambiar como tal el estado de la propiedad a Hotel (ya que lo hice asi)
+     * @param jugadorHotel jugador que compra el hotel
+     * @param propiedadCambiar propiedad que pasara a ser del tipo Hotel
+     */
+    public void construirHotel(Player_21142512_IgnacioTapia jugadorHotel,
+                               Property_21142512_IgnacioTapia propiedadCambiar){
+        if (propiedadCambiar.getCasas() == juegoBase.getMaximoCasas()){
+            Hotel propiedadHotel = new Hotel(
+                    propiedadCambiar.getIdProp(),
+                    propiedadCambiar.getNombreProp(),
+                    propiedadCambiar.getPosProp(),
+                    propiedadCambiar.getPrecio(),
+                    propiedadCambiar.getRenta(),
+                    propiedadCambiar.getDuenio(),
+                    propiedadCambiar.getCasas(),
+                    propiedadCambiar.isEstaHipotecada()
+            );
+            int dineroTemp = jugadorHotel.getDinero();
+            propiedadHotel.setCasas(0);
+            propiedadHotel.aumentarHoteles();
+            jugadorHotel.setDinero(dineroTemp - propiedadHotel.getRenta());
+            jugadorHotel.getPropiedades().remove(propiedadCambiar);
+            jugadorHotel.getPropiedades().add(propiedadHotel);
+        }
+    }
 }
