@@ -93,6 +93,11 @@ public class Player_21142512_IgnacioTapia {
      * @param nuevoDinero nueva cantidad de dinero
      */
     public void setDinero(int nuevoDinero) { this.dinero = nuevoDinero; }
+    public void hipotecarPropiedad(Property_21142512_IgnacioTapia propAHipotecar) {
+        setDinero(getDinero() + propAHipotecar.getRenta());
+        propAHipotecar.setPrecio(0);
+        propAHipotecar.setEstaHipotecada(true);
+    }
 
     /**
      * funcion que permite comprar propiedades y añadirlas a la lista del jugador
