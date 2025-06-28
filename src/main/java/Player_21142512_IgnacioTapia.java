@@ -37,13 +37,7 @@ public class Player_21142512_IgnacioTapia {
 
     @Override
     public String toString() {
-        return "Datos del jugador["+"id: "+id+
-                ",nombre: "+nombre+
-                ",dinero: "+dinero+
-                ",propiedades: "+propiedades+
-                ",posicion: "+posicion+
-                ",en la carcel? "+enCarcel+
-                ",cartas para salir de la carcel: "+totalCartasSalirCarcel+"]"+"\n";
+        return nombre;
     }
 
     /**
@@ -93,9 +87,15 @@ public class Player_21142512_IgnacioTapia {
      * @param nuevoDinero nueva cantidad de dinero
      */
     public void setDinero(int nuevoDinero) { this.dinero = nuevoDinero; }
+
+    /**
+     * funcion que hipoteca la X propiedad
+     * cambia su renta a 0
+     * @param propAHipotecar propiedad a hipotecar
+     */
     public void hipotecarPropiedad(Property_21142512_IgnacioTapia propAHipotecar) {
         setDinero(getDinero() + propAHipotecar.getRenta());
-        propAHipotecar.setPrecio(0);
+        propAHipotecar.setRenta(0);
         propAHipotecar.setEstaHipotecada(true);
     }
 

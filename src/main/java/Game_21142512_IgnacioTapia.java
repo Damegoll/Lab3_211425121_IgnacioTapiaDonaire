@@ -104,6 +104,9 @@ public class Game_21142512_IgnacioTapia{
         int nuevaPos = jugadorMover.getPosicion() + valorDados;
         jugadorMover.setPosicion(nuevaPos);
     }
+    public boolean verificarBancarrota(Player_21142512_IgnacioTapia jugadorBroke){
+        return jugadorBroke.getDinero() <= 0;
+    }
     /**
      * getter de la lista de jugadores dentro del juego
      * @return lista de jugadores

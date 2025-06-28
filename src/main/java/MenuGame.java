@@ -29,6 +29,22 @@ public class MenuGame implements Menu {
         switch (opcionJugador) {
             case 1:
                 System.out.println("Iniciando partida...");
+                juego.cargarDatosIniciales();
+                System.out.println("Se han cargado los datos exitosamente!");
+                if (juego.getListaJugadores() == null || juego.getListaJugadores().size() < 2){
+                    System.out.println("Lista de jugadores invalida, porfavor, ingrese almenos 2");
+                    menuJuego();
+                }
+                System.out.println("Los jugadores en juego son:");
+                for (Player_21142512_IgnacioTapia jugadorMostrar : juego.getListaJugadores()){
+                    System.out.println(jugadorMostrar);
+                }
+                System.out.println("test, dinero del banco: ");
+                System.out.println(juego.getDineroBanco());
+                System.out.println("test dados en juego: ");
+                System.out.println(juego.getNumeroDados());
+                System.out.println("test, vamos a ver que pasa si dejo una accion vacia");
+                String palabraX = scanner.next();
                 break;
             case 2:
                 System.out.println("Establezca un nombre para el jugador:");
@@ -37,8 +53,7 @@ public class MenuGame implements Menu {
                         nombrePlayer,1500,new ArrayList<>(),0,false,0);
                 contadorIds++;
                 juego.agregarJugador(nuevoJugador);
-                System.out.println("Nuevo jugador añadido exitosamente");
-                System.out.println(juego.getListaJugadores());
+                System.out.println("Nuevo jugador agregado exitosamente");
                 menuJuego();
             case 3:
                 System.out.println("Saliendo del juego...");

@@ -94,10 +94,10 @@ public class Property_21142512_IgnacioTapia {
     public void setEstaHipotecada(boolean seHipoteca) { this.estaHipotecada = seHipoteca; }
 
     /**
-     * setter que permite cambiar el precio de X propiedad
-     * @param precioProp precio a cambiar de la propiedad
+     * setter que permite cambiar la renta de X propiedad
+     * @param rentaProp renta a cambiar de la propiedad
      */
-    public void setPrecio(int precioProp) { this.precio = precioProp; }
+    public void setRenta(int rentaProp) { this.renta = rentaProp; }
 
     /**
      * calcula la renta de la propiedad dependiendo del total de casas y hoteles
