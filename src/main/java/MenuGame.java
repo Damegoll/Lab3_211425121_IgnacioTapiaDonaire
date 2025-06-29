@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Collections;
 /**
  * Interfaz del menu del juego
  * basicamente el menu en si
@@ -18,15 +19,17 @@ public class MenuGame implements Menu {
     @Override
     public void menuJuego() {
         Scanner scanner = new Scanner(System.in);
-        int opcionJugador;
+        int opcionJugadorMenu;
+        String opcionJugadorEleccion;
 
         System.out.println("Bienvenido a Capitalia!, por favor, elige una de las opciones");
         System.out.println("1. Iniciar Partida");
         System.out.println("2. Agregar jugador a la partida");
         System.out.println("3. Salir del Juego");
-        opcionJugador = scanner.nextInt();
+        opcionJugadorMenu = scanner.nextInt();
 
-        switch (opcionJugador) {
+
+        switch (opcionJugadorMenu) {
             case 1:
                 System.out.println("Iniciando partida...");
                 juego.cargarDatosIniciales();
@@ -35,32 +38,37 @@ public class MenuGame implements Menu {
                     System.out.println("Lista de jugadores invalida, porfavor, ingrese almenos 2");
                     menuJuego();
                 }
-                System.out.println("Los jugadores en juego son:");
+                Collections.shuffle(juego.getListaJugadores());
+                System.out.println("El orden de los jugadores es aleatorio!");
+                System.out.println("Veamos quien tuvo suerte...");
+                System.out.println("El orden de jugadores es:");
                 for (Player_21142512_IgnacioTapia jugadorMostrar : juego.getListaJugadores()){
                     System.out.println(jugadorMostrar);
                 }
-                System.out.println("test, dinero del banco: ");
-                System.out.println(juego.getDineroBanco());
-                System.out.println("test dados en juego: ");
-                System.out.println(juego.getNumeroDados());
-                System.out.println("test, vamos a ver que pasa si dejo una accion vacia");
-                String palabraX = scanner.next();
+                juego.jugarTurno();
                 break;
             case 2:
-                System.out.println("Establezca un nombre para el jugador:");
-                String nombrePlayer = scanner.next();
-                Player_21142512_IgnacioTapia nuevoJugador = new Player_21142512_IgnacioTapia(contadorIds + 1,
-                        nombrePlayer,1500,new ArrayList<>(),0,false,0);
-                contadorIds++;
-                juego.agregarJugador(nuevoJugador);
-                System.out.println("Nuevo jugador agregado exitosamente");
+                String jugadorEleccion;
+                do{
+                    System.out.println("Establezca un nombre para el jugador:");
+                    String nombrePlayer = scanner.next();
+                    Player_21142512_IgnacioTapia nuevoJugador = new Player_21142512_IgnacioTapia(contadorIds + 1,
+                            nombrePlayer,1500,new ArrayList<>(),0,false,0);
+                    contadorIds++;
+                    juego.agregarJugador(nuevoJugador);
+                    System.out.println("Nuevo jugador agregado exitosamente");
+                    System.out.println("Desea ingresar uno adicional? (S/N)");
+                    jugadorEleccion = scanner.next();
+                } while(jugadorEleccion.equalsIgnoreCase("S"));
                 menuJuego();
+                break;
             case 3:
                 System.out.println("Saliendo del juego...");
                 break;
             default:
                 System.out.println("Opcion invalida, por favor, intente nuevamente");
                 menuJuego();
+                break;
         }
         scanner.close();
     }

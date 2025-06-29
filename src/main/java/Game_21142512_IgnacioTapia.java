@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 /**
  * Clase del juego en Capitalia
  * contiene lo necesario para poder inicializar
@@ -57,10 +58,22 @@ public class Game_21142512_IgnacioTapia{
                 2,1600,210,"Banco",0,false);
         Property_21142512_IgnacioTapia prop3 = new Property_21142512_IgnacioTapia(3,"prop3",
                 3,1700,220,"Banco",0,false);
+        Property_21142512_IgnacioTapia prop4 = new Property_21142512_IgnacioTapia(4,"prop4",
+                4,1900,240,"Banco",0,false);
+        Property_21142512_IgnacioTapia prop5 = new Property_21142512_IgnacioTapia(5,"prop5",
+                5,2100,260,"Banco",0,false);
+        Property_21142512_IgnacioTapia prop6 = new Property_21142512_IgnacioTapia(6,"prop6",
+                6,2300,280,"Banco",0,false);
+        Property_21142512_IgnacioTapia prop7 = new Property_21142512_IgnacioTapia(7,"prop7",
+                7,2600,300,"Banco",0,false);
 
         agregarPropiedad(prop1);
         agregarPropiedad(prop2);
         agregarPropiedad(prop3);
+        agregarPropiedad(prop4);
+        agregarPropiedad(prop5);
+        agregarPropiedad(prop6);
+        agregarPropiedad(prop7);
 
         tablero = new Board_21142512_IgnacioTapia(listaPropiedades,listaCartas,casillasEspeciales);
     }
@@ -96,16 +109,85 @@ public class Game_21142512_IgnacioTapia{
     }
 
     /**
-     * funcion para mover al jugador dependiendo del valor obtenido por los n dados
-     * @param valorDados valor total de los dados lanzados
+     * funcion para mover al jugar a la posicion X, dado el valor de los dados
+     * @param valorDados valor de los dados obtenido
+     * @param jugadorAMover jugador X que se debe mover
      */
-    public void moverJugador(int valorDados){
-        Player_21142512_IgnacioTapia jugadorMover = getJugadorActual();
-        int nuevaPos = jugadorMover.getPosicion() + valorDados;
-        jugadorMover.setPosicion(nuevaPos);
+    public void moverJugador(int valorDados, Player_21142512_IgnacioTapia jugadorAMover){
+        int nuevaPos = jugadorAMover.getPosicion() + valorDados;
+        jugadorAMover.setPosicion(nuevaPos);
     }
     public boolean verificarBancarrota(Player_21142512_IgnacioTapia jugadorBroke){
         return jugadorBroke.getDinero() <= 0;
+    }
+    public void jugarTurno(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Es el turno de: " + getJugadorActual().getNombre() + "!");
+        System.out.println("Hora de avanzar! tira los dados!");
+        scanner.nextLine();
+        int valorDados = lanzarDados();
+        System.out.println("Conseguiste: " + valorDados);
+        moverJugador(valorDados, getJugadorActual());
+        System.out.println("pos real jugador: " + getJugadorActual().getPosicion());
+        System.out.println("test tamanio lista prop: " + tablero.getListaProp().size());
+        System.out.println("test tamanio lista casillas especiales: " + tablero.getCasillasEspeciales().size());
+        int posicionJugador = getJugadorActual().getPosicion();
+        int tamanioTablero = tablero.getListaProp().size() + tablero.getCasillasEspeciales().size();
+        System.out.println("test tamanio tablero: " + tamanioTablero);
+        if (posicionJugador >= tamanioTablero){
+            posicionJugador = posicionJugador % tamanioTablero;
+            System.out.println("pos jugador: " + posicionJugador);
+            moverJugador(posicionJugador,getJugadorActual());
+            getJugadorActual().getPosicion();
+            System.out.println("pos real jugador: " + getJugadorActual().getPosicion());
+            System.out.println("Haz dado vuelta al tablero! llego el SII, suelta los impuestos");
+            Property_21142512_IgnacioTapia propEnCasilla = null;
+            for (Property_21142512_IgnacioTapia propiedades : tablero.getListaProp()){
+                if (propiedades.getPosProp() == posicionJugador){
+                    propEnCasilla = propiedades;
+                    System.out.println("Caiste en: " + propEnCasilla.getNombreProp() + "!");
+                    System.out.println("Quisiera comprar la propiedad? (S/N)");
+                    String opcionJugador = scanner.next();
+                    if (opcionJugador.equalsIgnoreCase("S")){
+                        if (getJugadorActual().getDinero() >= propEnCasilla.getPrecio()){
+                            getJugadorActual().comprarPropiedad(propEnCasilla);
+                        } else{
+                            System.out.println("No tienes el dinero suficiente para ello :(");
+                        }
+                    }
+                    break;
+                }
+            }
+            for (CasillasEspeciales casillaEspecial : tablero.getCasillasEspeciales()){
+                if (casillaEspecial.getPosCasillaEspecial() == posicionJugador){
+                    System.out.println("Caiste en: " + casillaEspecial.getNombreCasilla() + "!");
+                    break;
+                }
+            }
+        }
+        Property_21142512_IgnacioTapia propEnCasilla = null;
+        for (Property_21142512_IgnacioTapia propiedades : tablero.getListaProp()){
+            if (propiedades.getPosProp() == posicionJugador){
+                propEnCasilla = propiedades;
+                System.out.println("Caiste en: " + propEnCasilla.getNombreProp() + "!");
+                System.out.println("Quisiera comprar la propiedad? (S/N)");
+                String opcionJugador = scanner.next();
+                if (opcionJugador.equalsIgnoreCase("S")){
+                    if (getJugadorActual().getDinero() >= propEnCasilla.getPrecio()){
+                        getJugadorActual().comprarPropiedad(propEnCasilla);
+                    } else{
+                        System.out.println("No tienes el dinero suficiente para ello :(");
+                    }
+                }
+                break;
+            }
+        }
+        for (CasillasEspeciales casillaEspecial : tablero.getCasillasEspeciales()){
+            if (casillaEspecial.getPosCasillaEspecial() == posicionJugador){
+                System.out.println("Caiste en: " + casillaEspecial.getNombreCasilla() + "!");
+                break;
+            }
+        }
     }
     /**
      * getter de la lista de jugadores dentro del juego

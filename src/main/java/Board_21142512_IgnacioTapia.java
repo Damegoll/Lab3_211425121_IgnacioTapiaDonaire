@@ -1,5 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Random;
+
 /**
  * Clase de Board del juego Capitalia
  * como las otras, tiene los datos del tablero en si
@@ -21,6 +23,21 @@ public class Board_21142512_IgnacioTapia {
         this.listaProp = listaProp;
         this.listaCartas = listaCarta;
         this.casillasEspeciales = casillasEspeciales;
+    }
+
+    /**
+     * saca una carta de la lista de cartas
+     * en caso de estar vacia, envia un mensaje clarificando este hecho
+     * @return la carta obtenida del random que a su vez es eliminada de la lista
+     */
+    public Card_21142512_IgnacioTapia extraerCarta() {
+        if (listaCartas.isEmpty()){
+            System.out.println("Ya no quedan cartas D:!");
+            return null;
+        }
+        Random random = new Random();
+        int sacarCarta = random.nextInt(listaCartas.size());
+        return listaCartas.remove(sacarCarta);
     }
     /**
      * getter de la lista de propiedades dentro del juego

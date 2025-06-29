@@ -100,6 +100,12 @@ public class Property_21142512_IgnacioTapia {
     public void setRenta(int rentaProp) { this.renta = rentaProp; }
 
     /**
+     * setter para cambiar el dueño de una propiedad
+     * @param duenio dueño nuevo de la X propiedad
+     */
+    public void setDuenio(String duenio) { this.duenio = duenio; }
+
+    /**
      * calcula la renta de la propiedad dependiendo del total de casas y hoteles
      * @param propiedadRenta propiedad a la que se le calcula dicha renta
      * @return monto total de la renta
