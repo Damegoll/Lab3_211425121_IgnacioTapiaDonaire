@@ -15,6 +15,7 @@ public class Game_21142512_IgnacioTapia{
     private List<CasillasEspeciales> casillasEspeciales;
     private Board_21142512_IgnacioTapia tablero;
     private Player_21142512_IgnacioTapia jugador;
+    private Property_21142512_IgnacioTapia propiedad;
     private int dineroBanco;
     private int numeroDados;
     private int turnoActual;
@@ -41,6 +42,23 @@ public class Game_21142512_IgnacioTapia{
         this.tasaImpuesto = tasaImpuesto;
         this.maximoCasas = maximoCasas;
         this.maximoHoteles = maximoHoteles;
+    }
+    public void imprimir(){
+        System.out.println("-----INFORMACION SOBRE CAPITALIA-----");
+        System.out.println("Dinero en el banco: " + getDineroBanco());
+        System.out.println("Tasa de impuesto: " + getTasaImpuesto() + "%");
+        System.out.println("Cantidad maxima de casas: " + getMaximoCasas());
+        System.out.println("Cantidad maximad de hoteles: " + getMaximoHoteles());
+        System.out.println("El juego se encuentra en el turno: " + getTurnoActual());
+        System.out.println("-----INFORMACION SOBRE EL TABLERO-----");
+        System.out.println("Propiedades del juego:");
+        for (Property_21142512_IgnacioTapia propiedad : listaPropiedades){
+            System.out.println(" " + propiedad);
+        }
+        System.out.println("Cartas del juego:");
+        for (Card_21142512_IgnacioTapia carta : listaCartas){
+            System.out.println(" " + carta);
+        }
     }
     /**
      * carga los datos iniciales del juego
@@ -75,6 +93,12 @@ public class Game_21142512_IgnacioTapia{
         agregarPropiedad(prop6);
         agregarPropiedad(prop7);
 
+        CasillasEspeciales carcel = new CasillasEspeciales("Carcel",8);
+        CasillasEspeciales salida = new CasillasEspeciales("Salida",0);
+
+        agregarCasillaEsp(carcel);
+        agregarCasillaEsp(salida);
+
         tablero = new Board_21142512_IgnacioTapia(listaPropiedades,listaCartas,casillasEspeciales);
     }
     /**
@@ -84,8 +108,29 @@ public class Game_21142512_IgnacioTapia{
     public void agregarPropiedad(Property_21142512_IgnacioTapia propiedad) {
         listaPropiedades.add(propiedad);
     }
+
+    /**
+     * agrega jugadores a la lista de jugadores en juego
+     * @param jugadorAgregado jugador X agregado a la lista
+     */
     public void agregarJugador(Player_21142512_IgnacioTapia jugadorAgregado) {
         listaJugadores.add(jugadorAgregado);
+    }
+
+    /**
+     * agrega las casillas especiales a la lista respectiva
+     * @param casillaEsp casilla en cuestion
+     */
+    public void agregarCasillaEsp(CasillasEspeciales casillaEsp){
+        casillasEspeciales.add(casillaEsp);
+    }
+
+    /**
+     * agrega las cartas a la lista de las cartas independiente si son de suerte o comunidad
+     * @param cartaX carta cualquiera agregada
+     */
+    public void agregarCartas(Card_21142512_IgnacioTapia cartaX){
+        listaCartas.add(cartaX);
     }
     /**
      * devuelve el nombre del jugador actual, osea el que esta jugando en ese momento
@@ -122,25 +167,22 @@ public class Game_21142512_IgnacioTapia{
     }
     public void jugarTurno(){
         Scanner scanner = new Scanner(System.in);
+        imprimir();
         System.out.println("Es el turno de: " + getJugadorActual().getNombre() + "!");
-        System.out.println("Hora de avanzar! tira los dados!");
+        System.out.println("Hora de avanzar! tira los dados! (Presiona Enter)");
         scanner.nextLine();
         int valorDados = lanzarDados();
         System.out.println("Conseguiste: " + valorDados);
         moverJugador(valorDados, getJugadorActual());
-        System.out.println("pos real jugador: " + getJugadorActual().getPosicion());
-        System.out.println("test tamanio lista prop: " + tablero.getListaProp().size());
-        System.out.println("test tamanio lista casillas especiales: " + tablero.getCasillasEspeciales().size());
         int posicionJugador = getJugadorActual().getPosicion();
         int tamanioTablero = tablero.getListaProp().size() + tablero.getCasillasEspeciales().size();
-        System.out.println("test tamanio tablero: " + tamanioTablero);
         if (posicionJugador >= tamanioTablero){
             posicionJugador = posicionJugador % tamanioTablero;
             System.out.println("pos jugador: " + posicionJugador);
-            moverJugador(posicionJugador,getJugadorActual());
+            getJugadorActual().setPosicion(posicionJugador);
             getJugadorActual().getPosicion();
-            System.out.println("pos real jugador: " + getJugadorActual().getPosicion());
             System.out.println("Haz dado vuelta al tablero! llego el SII, suelta los impuestos");
+            casillaSalida(getJugadorActual());
             Property_21142512_IgnacioTapia propEnCasilla = null;
             for (Property_21142512_IgnacioTapia propiedades : tablero.getListaProp()){
                 if (propiedades.getPosProp() == posicionJugador){
@@ -151,6 +193,7 @@ public class Game_21142512_IgnacioTapia{
                     if (opcionJugador.equalsIgnoreCase("S")){
                         if (getJugadorActual().getDinero() >= propEnCasilla.getPrecio()){
                             getJugadorActual().comprarPropiedad(propEnCasilla);
+                            System.out.println("Has comprado la propiedad " + propEnCasilla.getNombreProp() + "!");
                         } else{
                             System.out.println("No tienes el dinero suficiente para ello :(");
                         }
@@ -164,28 +207,36 @@ public class Game_21142512_IgnacioTapia{
                     break;
                 }
             }
-        }
-        Property_21142512_IgnacioTapia propEnCasilla = null;
-        for (Property_21142512_IgnacioTapia propiedades : tablero.getListaProp()){
-            if (propiedades.getPosProp() == posicionJugador){
-                propEnCasilla = propiedades;
-                System.out.println("Caiste en: " + propEnCasilla.getNombreProp() + "!");
-                System.out.println("Quisiera comprar la propiedad? (S/N)");
-                String opcionJugador = scanner.next();
-                if (opcionJugador.equalsIgnoreCase("S")){
-                    if (getJugadorActual().getDinero() >= propEnCasilla.getPrecio()){
-                        getJugadorActual().comprarPropiedad(propEnCasilla);
-                    } else{
-                        System.out.println("No tienes el dinero suficiente para ello :(");
+        } else {
+            Property_21142512_IgnacioTapia propEnCasilla = null;
+            for (Property_21142512_IgnacioTapia propiedades : tablero.getListaProp()){
+                if (propiedades.getPosProp() == posicionJugador){
+                    propEnCasilla = propiedades;
+                    System.out.println("Caiste en: " + propEnCasilla.getNombreProp() + "!");
+                    System.out.println("Quisiera comprar la propiedad? (S/N)");
+                    String opcionJugador = scanner.next();
+                    if (opcionJugador.equalsIgnoreCase("S")){
+                        if (getJugadorActual().getDinero() >= propEnCasilla.getPrecio()){
+                            getJugadorActual().comprarPropiedad(propEnCasilla);
+                            System.out.println("Has comprado la propiedad " + propEnCasilla.getNombreProp() + "!");
+                        } else{
+                            System.out.println("No tienes el dinero suficiente para ello :(");
+                        }
                     }
+                    break;
                 }
-                break;
             }
-        }
-        for (CasillasEspeciales casillaEspecial : tablero.getCasillasEspeciales()){
-            if (casillaEspecial.getPosCasillaEspecial() == posicionJugador){
-                System.out.println("Caiste en: " + casillaEspecial.getNombreCasilla() + "!");
-                break;
+            for (CasillasEspeciales casillaEspecial : tablero.getCasillasEspeciales()){
+                if (casillaEspecial.getPosCasillaEspecial() == posicionJugador){
+                    System.out.println("Caiste en: " + casillaEspecial.getNombreCasilla() + "!");
+                    String nombreCasilla = casillaEspecial.getNombreCasilla();
+                    if (nombreCasilla.equals("Salida")){
+                        casillaSalida(getJugadorActual());
+                    } else {
+                        casillaCarcel(getJugadorActual(),casillaEspecial);
+                    }
+                    break;
+                }
             }
         }
     }
@@ -224,4 +275,38 @@ public class Game_21142512_IgnacioTapia{
      * @return cantidad maxima de hoteles
      */
     public int getMaximoHoteles() { return maximoHoteles; }
+
+    /**
+     * cambia la posicion y estado del jugador al de la carcel en juego
+     * @param jugadorCarcel jugador que se movera a la carcel
+     */
+    public void casillaCarcel(Player_21142512_IgnacioTapia jugadorCarcel, CasillasEspeciales casillaCarcel){
+        jugadorCarcel.setPosicion(casillaCarcel.getPosCasillaEspecial());
+        jugadorCarcel.setEnCarcel(true);
+    }
+
+    /**
+     * funcion que permite cobrar los impuestos una vez el jugador pasa por la salida
+     * @param jugadorSalida jugador X al que se le cobran los impuestos
+     */
+    public void casillaSalida(Player_21142512_IgnacioTapia jugadorSalida){
+        int totalPrecioProp = 0;
+        for (Property_21142512_IgnacioTapia propiedad : jugadorSalida.getPropiedades()){
+            totalPrecioProp += propiedad.getPrecio();
+        }
+        int impuestoMonto = (totalPrecioProp * tasaImpuesto) / 100;
+        jugadorSalida.setDinero(jugadorSalida.getDinero() - impuestoMonto);
+        dineroBanco += impuestoMonto;
+        System.out.println("El impuesto a pagar es de: " + impuestoMonto);
+        System.out.println("El SII se a encargado de cobrar el monto exacto!");
+        System.out.println("Ahora mismo dispones de: " + jugadorSalida.getDinero() + " unidades monetarias");
+    }
+
+    /**
+     * setter para la cantidad de dados
+     * @param numeroDados cantidad de dados
+     */
+    public void setNumeroDados(int numeroDados){
+        this.numeroDados = numeroDados;
+    }
 }

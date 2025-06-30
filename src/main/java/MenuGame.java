@@ -25,7 +25,8 @@ public class MenuGame implements Menu {
         System.out.println("Bienvenido a Capitalia!, por favor, elige una de las opciones");
         System.out.println("1. Iniciar Partida");
         System.out.println("2. Agregar jugador a la partida");
-        System.out.println("3. Salir del Juego");
+        System.out.println("3. Establecer la cantidad de dados");
+        System.out.println("4. Salir del Juego");
         opcionJugadorMenu = scanner.nextInt();
 
 
@@ -53,7 +54,8 @@ public class MenuGame implements Menu {
                     System.out.println("Establezca un nombre para el jugador:");
                     String nombrePlayer = scanner.next();
                     Player_21142512_IgnacioTapia nuevoJugador = new Player_21142512_IgnacioTapia(contadorIds + 1,
-                            nombrePlayer,1500,new ArrayList<>(),0,false,0);
+                            nombrePlayer,50000,new ArrayList<>(),
+                            0,false,0);
                     contadorIds++;
                     juego.agregarJugador(nuevoJugador);
                     System.out.println("Nuevo jugador agregado exitosamente");
@@ -63,6 +65,18 @@ public class MenuGame implements Menu {
                 menuJuego();
                 break;
             case 3:
+                System.out.println("Puedes tener un minimo de 2 dados y un maximo de 4!");
+                System.out.println("Cuantos dados quieres?: ");
+                int cantidadDados = scanner.nextInt();
+                if (cantidadDados >= 2 && cantidadDados <= 4){
+                    juego.setNumeroDados(cantidadDados);
+                    System.out.println("Se han establecido un total de " + cantidadDados + " dados!");
+                } else {
+                    System.out.println("La cantidad establecida es invalida, por favor, verifique que sea entre 2 y 4");
+                }
+                menuJuego();
+                break;
+            case 4:
                 System.out.println("Saliendo del juego...");
                 break;
             default:

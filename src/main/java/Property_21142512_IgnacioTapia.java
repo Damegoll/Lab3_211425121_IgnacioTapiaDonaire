@@ -34,6 +34,14 @@ public class Property_21142512_IgnacioTapia {
         this.casas = casas;
         this.estaHipotecada = estaHipotecada;
     }
+    @Override
+    public String toString(){
+        return ("Nombre de la propiedad: " + getNombreProp() + "\n" +
+                "Posicion de la propiedad: " + getPosProp() + "\n" +
+                "Precio de la propiedad: " + getPrecio() + "\n" +
+                "Renta de la propiedad: " + getRenta() + "\n" +
+                "Duenio de la propiedad: " + getDuenio() + "\n");
+    }
     /**
      * Getter de la Id de la propiedad
      * @return id unico de la propiedad

@@ -15,14 +15,14 @@ public class Board_21142512_IgnacioTapia {
      * Constructor del tablero en si
      * @param listaProp lista de propiedades en juego
      * @param listaCarta lista de cartas en juego
-     * @param casillasEspeciales lista de las casillas especiales
+     * @param casillaEspecial lista de las casillas especiales
      */
     public Board_21142512_IgnacioTapia(List<Property_21142512_IgnacioTapia> listaProp,
                                        List<Card_21142512_IgnacioTapia> listaCarta,
-                                       List<CasillasEspeciales> casillasEspeciales){
+                                       List<CasillasEspeciales> casillaEspecial){
         this.listaProp = listaProp;
         this.listaCartas = listaCarta;
-        this.casillasEspeciales = casillasEspeciales;
+        this.casillasEspeciales = casillaEspecial;
     }
 
     /**

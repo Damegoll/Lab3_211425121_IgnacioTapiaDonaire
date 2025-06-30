@@ -6,18 +6,22 @@
 public class Card_21142512_IgnacioTapia {
     private int idCarta;
     private String descCarta;
-    // crear accion mas adelante
+    private AccionCarta accion;
     /**
      * Constructor de carta, le falta la accion en si
      * @param idCarta id unico de la carta
      * @param descCarta descripcion de la carta creada
+     * @param accionCarta accion de la carta especifica
      */
-    public Card_21142512_IgnacioTapia(int idCarta,String descCarta){
+    public Card_21142512_IgnacioTapia(int idCarta,String descCarta, AccionCarta accionCarta){
         this.idCarta = idCarta;
         this.descCarta = descCarta;
+        this.accion = accionCarta;
     }
-    //IMPORTANTE RECORDAR HACER LAS ACCIONES
-    //ya me veo dejandolo a última hora
+
+    public Card_21142512_IgnacioTapia(int idCarta, String descCarta) {
+    }
+
     /**
      * getter de la id de la carta
      * @return id unico de la carta
@@ -28,4 +32,19 @@ public class Card_21142512_IgnacioTapia {
      * @return descripcion de la carta especificada
      */
     public String getDescCarta() { return descCarta; }
+
+    /**
+     * getter para la accion de la carta
+     * @return accion de la carta misma
+     */
+    public AccionCarta getAccion(){ return accion; }
+
+    /**
+     * ejecuta la accion de la carta en si, en caso de no recibir carta literal no hace nada
+     * @param jugador jugador al que puede afectar la X accion
+     * @param juego juego que puede ser afectado por la X accion
+     */
+    public void ejecutarAccion(Player_21142512_IgnacioTapia jugador, Game_21142512_IgnacioTapia juego){
+        if (accion != null) accion.ejecutar(jugador,juego);
+    }
 }

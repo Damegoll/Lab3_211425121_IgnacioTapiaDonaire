@@ -89,6 +89,12 @@ public class Player_21142512_IgnacioTapia {
     public void setDinero(int nuevoDinero) { this.dinero = nuevoDinero; }
 
     /**
+     * setter que cambia el estado de enCarcel
+     * @param estadoCarcel estado de si esta o no en la carcel
+     */
+    public void setEnCarcel(boolean estadoCarcel) { this.enCarcel = estadoCarcel; }
+
+    /**
      * funcion que hipoteca la X propiedad
      * cambia su renta a 0
      * @param propAHipotecar propiedad a hipotecar
