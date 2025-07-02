@@ -11,6 +11,7 @@ public class Player_21142512_IgnacioTapia {
     private List<Property_21142512_IgnacioTapia> propiedades;
     private int posicion;
     private boolean enCarcel;
+    private int contadorRepetidos;
     private int totalCartasSalirCarcel;
     /**
      * Constructor de Player
@@ -111,7 +112,20 @@ public class Player_21142512_IgnacioTapia {
      */
     public void comprarPropiedad(Property_21142512_IgnacioTapia propiedadCompra){
         dinero -= propiedadCompra.getPrecio();
+        propiedadCompra.setDuenio(getNombre());
         propiedades.add(propiedadCompra);
+    }
+
+    /**
+     * aumenta en 1 la cantidad de casas
+     * el check para que no pase del maximo se debe hacer al utilizarlo
+     * @param propCasa propiedad a la que agregar una casa
+     */
+    public void comprarCasa(Property_21142512_IgnacioTapia propCasa, int maxCasas){
+        dinero -= propCasa.getPrecio();
+        if (propCasa.getCasas() < maxCasas){
+            propCasa.setCasas(propCasa.getCasas() + 1);
+        }
     }
 }
 

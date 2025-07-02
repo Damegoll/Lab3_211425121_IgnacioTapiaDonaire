@@ -21,6 +21,11 @@ public class Card_21142512_IgnacioTapia {
 
     public Card_21142512_IgnacioTapia(int idCarta, String descCarta) {
     }
+    @Override
+    public String toString() {
+        return ("Id carta: " + getIdCarta() + "\n" +
+                "Descripcion de la carta: " + getDescCarta() + "\n");
+    }
 
     /**
      * getter de la id de la carta

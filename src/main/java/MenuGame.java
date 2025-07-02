@@ -26,7 +26,8 @@ public class MenuGame implements Menu {
         System.out.println("1. Iniciar Partida");
         System.out.println("2. Agregar jugador a la partida");
         System.out.println("3. Establecer la cantidad de dados");
-        System.out.println("4. Salir del Juego");
+        System.out.println("4. Mostrar estado actual del juego");
+        System.out.println("5. Salir del Juego");
         opcionJugadorMenu = scanner.nextInt();
 
 
@@ -46,7 +47,15 @@ public class MenuGame implements Menu {
                 for (Player_21142512_IgnacioTapia jugadorMostrar : juego.getListaJugadores()){
                     System.out.println(jugadorMostrar);
                 }
-                juego.jugarTurno();
+                boolean seguirJuego = true;
+                do {
+                    seguirJuego = juego.jugarTurno();
+                    if (!seguirJuego){
+                        System.out.println("Todos los demas jugadores quedaron en bancarrota, Ganaste!");
+                        System.out.println("Felicitaciones a " + juego.getJugadorActual() + " ! ");
+                        break;
+                    }
+                } while (seguirJuego);
                 break;
             case 2:
                 String jugadorEleccion;
@@ -54,7 +63,7 @@ public class MenuGame implements Menu {
                     System.out.println("Establezca un nombre para el jugador:");
                     String nombrePlayer = scanner.next();
                     Player_21142512_IgnacioTapia nuevoJugador = new Player_21142512_IgnacioTapia(contadorIds + 1,
-                            nombrePlayer,50000,new ArrayList<>(),
+                            nombrePlayer,1500,new ArrayList<>(),
                             0,false,0);
                     contadorIds++;
                     juego.agregarJugador(nuevoJugador);
@@ -77,6 +86,10 @@ public class MenuGame implements Menu {
                 menuJuego();
                 break;
             case 4:
+                juego.imprimir();
+                menuJuego();
+                break;
+            case 5:
                 System.out.println("Saliendo del juego...");
                 break;
             default:

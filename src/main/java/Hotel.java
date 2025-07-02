@@ -25,6 +25,12 @@ public class Hotel extends Property_21142512_IgnacioTapia{
      * esta en el maximo o no, simplemente aumenta la cantidad
      */
     public void aumentarHoteles() { cantidadHoteles++; }
+
+    /**
+     * quita 1 Hotel sin mas, lo quita tal cual
+     * su uso es exclusivo de una carta en especifico
+     */
+    public void quitarHoteles() { cantidadHoteles--; }
     /**
      * getter de la cantidad de hoteles ya construidos
      * sobreescribe a getCantidadHoteles en caso de tener 1 o más

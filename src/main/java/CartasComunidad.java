@@ -3,7 +3,7 @@
  * CartasComunidad son una subclase de Card
  */
 public class CartasComunidad extends Card_21142512_IgnacioTapia{
-    public CartasComunidad(int idCarta, String descCarta) {
-        super(idCarta,descCarta);
+    public CartasComunidad(int idCarta, String descCarta, AccionCarta accionCarta) {
+        super(idCarta,descCarta,accionCarta);
     }
 }

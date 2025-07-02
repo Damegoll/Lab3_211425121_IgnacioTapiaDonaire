@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * Propiedad en el juego Capitalia
  * Tiene todos los datos pertenecientes al mismo
@@ -118,10 +120,10 @@ public class Property_21142512_IgnacioTapia {
      * @param propiedadRenta propiedad a la que se le calcula dicha renta
      * @return monto total de la renta
      */
-    public double calcularRentaPropiedad(Property_21142512_IgnacioTapia propiedadRenta){
-        double montoRenta = 0;
+    public int calcularRentaPropiedad(Property_21142512_IgnacioTapia propiedadRenta){
+        int montoRenta = 0;
         montoRenta += propiedadRenta.getRenta();
-        montoRenta += 0.2 * propiedadRenta.getCasas();
+        montoRenta += (int) (0.2 * propiedadRenta.getCasas());
         montoRenta += 2 * getCantidadHoteles();
         return montoRenta;
     }
@@ -131,8 +133,8 @@ public class Property_21142512_IgnacioTapia {
      * @param jugadorJuego el jugador como tal
      * @return valor total de la renta entre todas las propiedades
      */
-    public double calcularRentaJugador(Player_21142512_IgnacioTapia jugadorJuego) {
-        double rentaTotalJugador = 0;
+    public int calcularRentaJugador(Player_21142512_IgnacioTapia jugadorJuego) {
+        int rentaTotalJugador = 0;
         for (Property_21142512_IgnacioTapia propiedades : jugadorJuego.getPropiedades()){
             rentaTotalJugador += propiedades.calcularRentaPropiedad(propiedades);
         }
@@ -147,8 +149,8 @@ public class Property_21142512_IgnacioTapia {
      */
     public void pagarRenta(Player_21142512_IgnacioTapia jugadorQuePaga,
                              Player_21142512_IgnacioTapia jugadorQueCobra,
-                             double montoCobro){
-        jugadorQuePaga.setDinero((int) (jugadorQuePaga.getDinero() - montoCobro));
-        jugadorQueCobra.setDinero((int) (jugadorQueCobra.getDinero() + montoCobro));
+                           int montoCobro){
+        jugadorQuePaga.setDinero((jugadorQuePaga.getDinero() - montoCobro));
+        jugadorQueCobra.setDinero((jugadorQueCobra.getDinero() + montoCobro));
     }
 }
