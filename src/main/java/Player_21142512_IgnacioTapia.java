@@ -78,6 +78,12 @@ public class Player_21142512_IgnacioTapia {
     public int getTotalCartasSalirCarcel() { return totalCartasSalirCarcel; }
 
     /**
+     * getter para el contador de repetidos
+     * @return repetidos totales
+     */
+    public int getContadorRepetidos() { return contadorRepetidos; }
+
+    /**
      * setter que cambia la posicion del jugador
      * @param nuevaPosicion nueva posicion del jugador
      */
@@ -90,10 +96,23 @@ public class Player_21142512_IgnacioTapia {
     public void setDinero(int nuevoDinero) { this.dinero = nuevoDinero; }
 
     /**
+     * setter para la cantidad de cartas para salir de la carcel
+     * @param totalCartasSalirCarcel nueva cantidad de cartas
+     */
+    public void setTotalCartasSalirCarcel(int totalCartasSalirCarcel){
+        this.totalCartasSalirCarcel = totalCartasSalirCarcel; }
+
+    /**
      * setter que cambia el estado de enCarcel
      * @param estadoCarcel estado de si esta o no en la carcel
      */
     public void setEnCarcel(boolean estadoCarcel) { this.enCarcel = estadoCarcel; }
+
+    /**
+     * setter para los repetidos
+     * @param repetidos cantidad de repetidos
+     */
+    public void setContadorRepetidos(int repetidos){ this.contadorRepetidos = repetidos; }
 
     /**
      * funcion que hipoteca la X propiedad
@@ -101,7 +120,7 @@ public class Player_21142512_IgnacioTapia {
      * @param propAHipotecar propiedad a hipotecar
      */
     public void hipotecarPropiedad(Property_21142512_IgnacioTapia propAHipotecar) {
-        setDinero(getDinero() + propAHipotecar.getRenta());
+        setDinero(getDinero() + propAHipotecar.getPrecio());
         propAHipotecar.setRenta(0);
         propAHipotecar.setEstaHipotecada(true);
     }
@@ -117,15 +136,27 @@ public class Player_21142512_IgnacioTapia {
     }
 
     /**
-     * aumenta en 1 la cantidad de casas
-     * el check para que no pase del maximo se debe hacer al utilizarlo
-     * @param propCasa propiedad a la que agregar una casa
+     * permite al jugador comprar casas en la propiedad a su nombre
+     * @param propCasa propiedad a la que se le añade una casa
+     * @param maxCasas maximo de casas en juego
      */
     public void comprarCasa(Property_21142512_IgnacioTapia propCasa, int maxCasas){
-        dinero -= propCasa.getPrecio();
         if (propCasa.getCasas() < maxCasas){
             propCasa.setCasas(propCasa.getCasas() + 1);
+            dinero -= propCasa.getPrecio();
         }
+    }
+
+    /**
+     * funcion que muestras las estadisticas del jugador
+     */
+    public void mostrarEstadisticas(){
+        System.out.println("Estadisticas de " + getNombre() + ":");
+        System.out.println("Dinero actual: " + getDinero());
+        System.out.println("Propiedades actuales: " + getPropiedades());
+        System.out.println("Cantidad de cartas para salir de la carcel: " + getTotalCartasSalirCarcel());
+        System.out.println("Renta total entre propiedades: " +
+                Property_21142512_IgnacioTapia.calcularRentaJugador(this));
     }
 }
 

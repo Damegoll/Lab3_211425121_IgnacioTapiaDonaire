@@ -19,8 +19,6 @@ public class Card_21142512_IgnacioTapia {
         this.accion = accionCarta;
     }
 
-    public Card_21142512_IgnacioTapia(int idCarta, String descCarta) {
-    }
     @Override
     public String toString() {
         return ("Id carta: " + getIdCarta() + "\n" +

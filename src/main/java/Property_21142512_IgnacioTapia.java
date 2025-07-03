@@ -1,5 +1,3 @@
-import java.util.List;
-
 /**
  * Propiedad en el juego Capitalia
  * Tiene todos los datos pertenecientes al mismo
@@ -37,12 +35,18 @@ public class Property_21142512_IgnacioTapia {
         this.estaHipotecada = estaHipotecada;
     }
     @Override
-    public String toString(){
-        return ("Nombre de la propiedad: " + getNombreProp() + "\n" +
+    public String toString() {
+        String info = "\n" +
+                "Nombre de la propiedad: " + getNombreProp() + "\n" +
                 "Posicion de la propiedad: " + getPosProp() + "\n" +
                 "Precio de la propiedad: " + getPrecio() + "\n" +
                 "Renta de la propiedad: " + getRenta() + "\n" +
-                "Duenio de la propiedad: " + getDuenio() + "\n");
+                "Duenio de la propiedad: " + getDuenio() + "\n" +
+                "Cantidad de casas: " + getCasas() + "\n";
+        if (this instanceof Hotel) {
+            info += "Cantidad de hoteles: " + getCantidadHoteles() + "\n";
+        }
+        return info;
     }
     /**
      * Getter de la Id de la propiedad
@@ -122,9 +126,7 @@ public class Property_21142512_IgnacioTapia {
      */
     public int calcularRentaPropiedad(Property_21142512_IgnacioTapia propiedadRenta){
         int montoRenta = 0;
-        montoRenta += propiedadRenta.getRenta();
-        montoRenta += (int) (0.2 * propiedadRenta.getCasas());
-        montoRenta += 2 * getCantidadHoteles();
+        montoRenta += (propiedadRenta.getRenta() + (int) (0.2 * propiedadRenta.getCasas() + 2 * getCantidadHoteles()));
         return montoRenta;
     }
 
@@ -133,7 +135,7 @@ public class Property_21142512_IgnacioTapia {
      * @param jugadorJuego el jugador como tal
      * @return valor total de la renta entre todas las propiedades
      */
-    public int calcularRentaJugador(Player_21142512_IgnacioTapia jugadorJuego) {
+    public static int calcularRentaJugador(Player_21142512_IgnacioTapia jugadorJuego) {
         int rentaTotalJugador = 0;
         for (Property_21142512_IgnacioTapia propiedades : jugadorJuego.getPropiedades()){
             rentaTotalJugador += propiedades.calcularRentaPropiedad(propiedades);

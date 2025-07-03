@@ -10,7 +10,7 @@ public class Board_21142512_IgnacioTapia {
     private List<Property_21142512_IgnacioTapia> listaProp;
     private List<Card_21142512_IgnacioTapia> listaCartas;
     private List<CasillasEspeciales> casillasEspeciales;
-    // debo ver si voy a ocupar listas enlazadas o de array
+
     /**
      * Constructor del tablero en si
      * @param listaProp lista de propiedades en juego
@@ -26,18 +26,24 @@ public class Board_21142512_IgnacioTapia {
     }
 
     /**
-     * saca una carta de la lista de cartas
-     * en caso de estar vacia, envia un mensaje clarificando este hecho
-     * @return la carta obtenida del random que a su vez es eliminada de la lista
+     * extraer una carta del mazo de cartas y la elimina de dicho mazo posteriormente
+     * @param tipoCarta clasificador para ver si es de suerte o comunidad
+     * @return la carta removida
      */
-    public Card_21142512_IgnacioTapia extraerCarta() {
-        if (listaCartas.isEmpty()){
-            System.out.println("Ya no quedan cartas D:!");
+    public Card_21142512_IgnacioTapia extraerCarta(Class<?> tipoCarta) {
+        List<Card_21142512_IgnacioTapia> cartasFiltradas = new ArrayList<>();
+        for (Card_21142512_IgnacioTapia carta : listaCartas){
+         if (tipoCarta.isInstance(carta)){
+             cartasFiltradas.add(carta);
+         }
+        }
+        if (cartasFiltradas.isEmpty()){
             return null;
         }
         Random random = new Random();
-        int sacarCarta = random.nextInt(listaCartas.size());
-        return listaCartas.remove(sacarCarta);
+        Card_21142512_IgnacioTapia carta = cartasFiltradas.get(random.nextInt(cartasFiltradas.size()));
+        listaCartas.remove(carta);
+        return carta;
     }
     /**
      * getter de la lista de propiedades dentro del juego

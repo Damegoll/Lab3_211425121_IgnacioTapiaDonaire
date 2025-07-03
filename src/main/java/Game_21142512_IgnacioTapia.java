@@ -13,7 +13,7 @@ public class Game_21142512_IgnacioTapia{
     private List<Property_21142512_IgnacioTapia> listaPropiedades;
     private List<Card_21142512_IgnacioTapia> listaCartas;
     private List<CasillasEspeciales> casillasEspeciales;
-    private Board_21142512_IgnacioTapia tablero;
+    Board_21142512_IgnacioTapia tablero;
     private Property_21142512_IgnacioTapia propEnCasilla;
     private int dineroBanco;
     private int numeroDados;
@@ -42,8 +42,11 @@ public class Game_21142512_IgnacioTapia{
         this.maximoCasas = maximoCasas;
         this.maximoHoteles = maximoHoteles;
     }
+
+    /**
+     * Imprime los datos del juego Capitalia
+     */
     public void imprimir(){
-        cargarDatosIniciales();
         System.out.println("-----INFORMACION SOBRE CAPITALIA-----");
         System.out.println("Dinero en el banco: " + getDineroBanco());
         System.out.println("Tasa de impuesto: " + getTasaImpuesto() + "%");
@@ -76,7 +79,6 @@ public class Game_21142512_IgnacioTapia{
         listaCartas = new LinkedList<>();
         casillasEspeciales = new ArrayList<>();
 
-        // Banco
         Property_21142512_IgnacioTapia prop1 = new Property_21142512_IgnacioTapia(1,"prop1",
                 1,100,15,"Banco",0,false);
         Property_21142512_IgnacioTapia prop2 = new Property_21142512_IgnacioTapia(2,"prop2",
@@ -124,6 +126,7 @@ public class Game_21142512_IgnacioTapia{
         agregarPropiedad(prop14);
         agregarPropiedad(prop15);
 
+
         CasillasEspeciales carcel = new CasillasEspeciales("Carcel",7);
         CasillasEspeciales salida = new CasillasEspeciales("Salida",0);
         CasillasEspeciales comunidad = new CasillasEspeciales("Comunidad", 9);
@@ -138,7 +141,7 @@ public class Game_21142512_IgnacioTapia{
                 "Ganaste 1000$! Un grande",
                 new AccionDarPlata(1000));
         Card_21142512_IgnacioTapia carta2 = new CartasSuerte(2,
-                "Te asaltaron D:, pierdes 100",
+                "Te asaltaron D:, pierdes 500",
                 new AccionQuitarPlata(100));
         Card_21142512_IgnacioTapia carta3 = new CartasSuerte(3,
                 "Te hacen un lift! avanza 5 espacios",
@@ -146,16 +149,78 @@ public class Game_21142512_IgnacioTapia{
         Card_21142512_IgnacioTapia carta4 = new CartasSuerte(4,
                 "Te asustas al ver un tipo sospechoso...., retrocedes 2 casillas",
                 new AccionMoverXEspacios(-2));
-        Card_21142512_IgnacioTapia carta5 = new CartasComunidad(5,
+        Card_21142512_IgnacioTapia carta5 = new CartasSuerte(5,
+                "Avanzas a una casilla de comunidad!",
+                new AccionMoverCasillaEsp("Comunidad"));
+        Card_21142512_IgnacioTapia carta6 = new CartasSuerte(6,
+                "Es tu cumpleanios! todos los jugadores te dan 150",
+                new DineroRecibeJugador(150));
+        Card_21142512_IgnacioTapia carta7 = new CartasSuerte(7,
+                "Tu casa sufrio una fuga!, te cobran 100 por reparaciones",
+                new AccionQuitarPlata(100));
+        Card_21142512_IgnacioTapia carta8 = new CartasSuerte(8,
+                "Te encuentras una moneda de 200, esas existen?",
+                new AccionDarPlata(200));
+        Card_21142512_IgnacioTapia carta9 = new CartasSuerte(9,
+                "Te vas a la carcel! NO SE SUPONE QUE SON DE SUERTE?!?",
+                new AccionMoverCasillaEsp("Carcel"));
+        Card_21142512_IgnacioTapia carta10 = new CartasSuerte(10,
+                "Alguien te regala una carta para salir de la carcel, porque si",
+                new AccionCartaCarcel(1));
+        Card_21142512_IgnacioTapia carta11 = new CartasComunidad(11,
                 "El mercado esta loco! toda propiedad con casa pierde 1, todo hotel desaparece" +
                         " y toda propiedad sin casa se vuelve del Banco!",
                 new AccionCaos());
+        Card_21142512_IgnacioTapia carta12 = new CartasComunidad(12,
+                "Pero que generoso!, le das 150 a cada jugador",
+                new DineroDaJugador(150));
+        Card_21142512_IgnacioTapia carta13 = new CartasComunidad(13,
+                "Te impones sobre los demas!, todos los jugadores te dan 100",
+                new DineroRecibeJugador(100));
+        Card_21142512_IgnacioTapia carta14 = new CartasComunidad(14,
+                "Te pillaron malversando bienes... les das 100 a los jugadores por su silencio",
+                new DineroDaJugador(100));
+        Card_21142512_IgnacioTapia carta15 = new CartasComunidad(15,
+                "Te pillaron evadiendo impuestos!!!, te vas a la carcel directo" +
+                        " y te dejan con 1 peso",
+                new AccionCarcelDirecto());
+        Card_21142512_IgnacioTapia carta16 = new CartasComunidad(16,
+                "Tienes amigos en el gobierno, cambia el impuesto al 1%",
+                new AccionImpuesto(1));
+        Card_21142512_IgnacioTapia carta17 = new CartasComunidad(17,
+                "El mundo piensa que tienes demasiados bienes" +
+                        ", sube el impuesto al 20%",
+                new AccionImpuesto(20));
+        Card_21142512_IgnacioTapia carta18 = new CartasComunidad(18,
+                "Recibes de tu amigo el presidente una carta para salir de la carcel",
+                new AccionCartaCarcel(1));
+        Card_21142512_IgnacioTapia carta19 = new CartasComunidad(19,
+                "El banco te avisa que tienes una herencia, recibes 600",
+                new AccionDarPlata(600));
+        Card_21142512_IgnacioTapia carta20 = new CartasComunidad(20,
+                "Te estacionaste erroneamente y llegaron a fiscalizarte, te multan por 200",
+                new AccionQuitarPlata(200));
 
         agregarCartas(carta1);
         agregarCartas(carta2);
         agregarCartas(carta3);
         agregarCartas(carta4);
         agregarCartas(carta5);
+        agregarCartas(carta6);
+        agregarCartas(carta7);
+        agregarCartas(carta8);
+        agregarCartas(carta9);
+        agregarCartas(carta10);
+        agregarCartas(carta11);
+        agregarCartas(carta12);
+        agregarCartas(carta13);
+        agregarCartas(carta14);
+        agregarCartas(carta15);
+        agregarCartas(carta16);
+        agregarCartas(carta17);
+        agregarCartas(carta18);
+        agregarCartas(carta19);
+        agregarCartas(carta20);
 
         tablero = new Board_21142512_IgnacioTapia(listaPropiedades,listaCartas,casillasEspeciales);
     }
@@ -249,6 +314,21 @@ public class Game_21142512_IgnacioTapia{
      */
     public boolean jugarTurno(){
         Scanner scanner = new Scanner(System.in);
+        if (getJugadorActual().getDinero() <= 0){
+            manejoHipotecas(getJugadorActual());
+            if (getJugadorActual().getDinero() <= 0){
+                for (Property_21142512_IgnacioTapia propiedad : getJugadorActual().getPropiedades()){
+                    propiedad.setDuenio("Banco");
+                    propiedad.setEstaHipotecada(false);
+                }
+                getJugadorActual().getPropiedades().clear();
+                listaJugadores.remove(getJugadorActual());
+                if (turnoActual >= listaJugadores.size()){
+                    turnoActual = 0;
+                }
+                avanzarTurno();
+            }
+        }
         if (getJugadorActual().isEnCarcel()){
             boolean sigueEnCarcel = manejoCarcel(getJugadorActual());
             if (sigueEnCarcel){
@@ -268,6 +348,20 @@ public class Game_21142512_IgnacioTapia{
                 dadosIguales = false;
             }
         }
+        if (dadosIguales){
+            getJugadorActual().setContadorRepetidos(getJugadorActual().getContadorRepetidos() + 1);
+            System.out.println("Se repitieron los dados!, llevas " + getJugadorActual().getContadorRepetidos());
+            if (getJugadorActual().getContadorRepetidos() == 3){
+                System.out.println("Se han repetido 3 veces, vas a la carcel :(");
+                getJugadorActual().setPosicion(7);
+                getJugadorActual().setEnCarcel(true);
+                getJugadorActual().setContadorRepetidos(0);
+                avanzarTurno();
+                return true;
+            }
+        } else {
+            getJugadorActual().setContadorRepetidos(0);
+        }
         moverJugador(sumaValorDados, getJugadorActual());
         int posicionJugador = getJugadorActual().getPosicion();
         int tamanioTablero = tablero.getListaProp().size() + tablero.getCasillasEspeciales().size();
@@ -275,7 +369,12 @@ public class Game_21142512_IgnacioTapia{
             posicionJugador = posicionJugador % tamanioTablero;
             getJugadorActual().setPosicion(posicionJugador);
             System.out.println("Haz dado vuelta al tablero! llego el SII, suelta los impuestos");
-            casillaSalida(getJugadorActual());
+            for (CasillasEspeciales casillaEspecial : tablero.getCasillasEspeciales()) {
+                if (casillaEspecial.getNombreCasilla().equalsIgnoreCase("Salida")) {
+                    casillaEspecial.accionar(getJugadorActual(), this);
+                    break;
+                }
+            }
             for (Property_21142512_IgnacioTapia propiedades : tablero.getListaProp()){
                 if (propiedades.getPosProp() == posicionJugador) {
                     propEnCasilla = propiedades;
@@ -294,7 +393,8 @@ public class Game_21142512_IgnacioTapia{
                                 if (!(propEnCasilla instanceof Hotel)){
                                     new Hotel(0,"",0,0,0,
                                             "",0,
-                                            false).construirHotel(getJugadorActual(),propEnCasilla);
+                                            false).construirHotel(getJugadorActual(),propEnCasilla,
+                                            getMaximoCasas());
                                     System.out.println("Felicitaciones " + getJugadorActual().getNombre() + "!," +
                                             " construiste un hotel!");
                                 } else if ((propEnCasilla).getCantidadHoteles() < getMaximoHoteles()){
@@ -316,14 +416,30 @@ public class Game_21142512_IgnacioTapia{
                                 propEnCasilla.calcularRentaPropiedad(propEnCasilla) +
                                 " a " + propEnCasilla.getDuenio());
                     } else {
-                        System.out.println("Quisiera comprar la propiedad? (S/N)");
-                        String opcionJugador = scanner.next();
-                        if (opcionJugador.equalsIgnoreCase("S")) {
-                            if (getJugadorActual().getDinero() >= propEnCasilla.getPrecio()) {
-                                getJugadorActual().comprarPropiedad(propEnCasilla);
-                                System.out.println("Has comprado la propiedad " + propEnCasilla.getNombreProp() + "!");
+                        boolean continuar = false;
+                        while (!continuar){
+                            System.out.println("Puedes ver tus estadisticas y comprar la propiedad!");
+                            System.out.println("1. Ver estadisticas actuales 2. Comprar propiedad " +
+                                    "3. Precio propiedad 4. Nada");
+                            int opcionJugador = scanner.nextInt();
+                            scanner.nextLine();
+                            if (opcionJugador == 1){
+                                getJugadorActual().mostrarEstadisticas();
+                            } else if (opcionJugador == 2){
+                                if (getJugadorActual().getDinero() >= propEnCasilla.getPrecio()) {
+                                    getJugadorActual().comprarPropiedad(propEnCasilla);
+                                    System.out.println("Has comprado la propiedad " +
+                                            propEnCasilla.getNombreProp() + "!");
+                                } else {
+                                    System.out.println("No tienes el dinero suficiente para ello :(");
+                                }
+                                continuar = true;
+                            } else if (opcionJugador == 3){
+                                System.out.println("Precio de la propiedad: " + propEnCasilla.getPrecio());
+                            } else if (opcionJugador == 4){
+                                continuar = true;
                             } else {
-                                System.out.println("No tienes el dinero suficiente para ello :(");
+                                System.out.println("Opcion no valida, por favor, elija una de las 3");
                             }
                         }
                     }
@@ -334,14 +450,12 @@ public class Game_21142512_IgnacioTapia{
                 if (casillaEspecial.getPosCasillaEspecial() == posicionJugador){
                     System.out.println("Caiste en: " + casillaEspecial.getNombreCasilla() + "!");
                     String nombreCasilla = casillaEspecial.getNombreCasilla();
-                    if (nombreCasilla.equals("Salida")){
-                        casillaSalida(getJugadorActual());
-                    } else if (nombreCasilla.equals("Carcel")){
-                        casillaCarcel(getJugadorActual(),casillaEspecial);
+                    if (nombreCasilla.equals("Carcel")){
+                        casillaEspecial.accionar(getJugadorActual(),this);
                     } else if (nombreCasilla.equals("Suerte")){
-                        casillaSuerte(getJugadorActual());
+                        casillaEspecial.accionar(getJugadorActual(),this);
                     } else if (nombreCasilla.equals("Comunidad")){
-                        casillaComunidad(getJugadorActual());
+                        casillaEspecial.accionar(getJugadorActual(),this);
                     }
                     break;
                 }
@@ -365,7 +479,8 @@ public class Game_21142512_IgnacioTapia{
                                 if (!(propEnCasilla instanceof Hotel)){
                                     new Hotel(0,"",0,0,0,
                                             "",0,
-                                            false).construirHotel(getJugadorActual(),propEnCasilla);
+                                            false).construirHotel(getJugadorActual(),propEnCasilla,
+                                            getMaximoCasas());
                                     System.out.println("Felicitaciones " + getJugadorActual().getNombre() + "!," +
                                             " construiste un hotel!");
                                 } else if (propEnCasilla.getCantidadHoteles() < getMaximoHoteles()){
@@ -387,14 +502,30 @@ public class Game_21142512_IgnacioTapia{
                                 propEnCasilla.calcularRentaPropiedad(propEnCasilla) +
                                 " a " + propEnCasilla.getDuenio());
                     } else {
-                        System.out.println("Quisiera comprar la propiedad? (S/N)");
-                        String opcionJugador = scanner.next();
-                        if (opcionJugador.equalsIgnoreCase("S")) {
-                            if (getJugadorActual().getDinero() >= propEnCasilla.getPrecio()) {
-                                getJugadorActual().comprarPropiedad(propEnCasilla);
-                                System.out.println("Has comprado la propiedad " + propEnCasilla.getNombreProp() + "!");
+                        boolean continuar = false;
+                        while (!continuar){
+                            System.out.println("Puedes ver tus estadisticas y comprar la propiedad!");
+                            System.out.println("1. Ver estadisticas actuales 2. Comprar propiedad " +
+                                    "3. Precio propiedad 4. Nada");
+                            int opcionJugador = scanner.nextInt();
+                            scanner.nextLine();
+                            if (opcionJugador == 1){
+                                getJugadorActual().mostrarEstadisticas();
+                            } else if (opcionJugador == 2){
+                                if (getJugadorActual().getDinero() >= propEnCasilla.getPrecio()) {
+                                    getJugadorActual().comprarPropiedad(propEnCasilla);
+                                    System.out.println("Has comprado la propiedad " +
+                                            propEnCasilla.getNombreProp() + "!");
+                                } else {
+                                    System.out.println("No tienes el dinero suficiente para ello :(");
+                                }
+                                continuar = true;
+                            } else if (opcionJugador == 3){
+                                System.out.println("Precio de la propiedad: " + propEnCasilla.getPrecio());
+                            } else if (opcionJugador == 4){
+                                continuar = true;
                             } else {
-                                System.out.println("No tienes el dinero suficiente para ello :(");
+                                System.out.println("Opcion no valida, por favor, elija una de las 3");
                             }
                         }
                     }
@@ -406,13 +537,13 @@ public class Game_21142512_IgnacioTapia{
                     System.out.println("Caiste en: " + casillaEspecial.getNombreCasilla() + "!");
                     String nombreCasilla = casillaEspecial.getNombreCasilla();
                     if (nombreCasilla.equals("Salida")){
-                        casillaSalida(getJugadorActual());
+                        casillaEspecial.accionar(getJugadorActual(),this);
                     } else if (nombreCasilla.equals("Carcel")){
-                        casillaCarcel(getJugadorActual(),casillaEspecial);
+                        casillaEspecial.accionar(getJugadorActual(),this);
                     } else if (nombreCasilla.equals("Suerte")){
-                        casillaSuerte(getJugadorActual());
+                        casillaEspecial.accionar(getJugadorActual(),this);
                     } else if (nombreCasilla.equals("Comunidad")){
-                        casillaComunidad(getJugadorActual());
+                        casillaEspecial.accionar(getJugadorActual(),this);
                     }
                     break;
                 }
@@ -420,22 +551,30 @@ public class Game_21142512_IgnacioTapia{
         }
         if (verificarBancarrota(getJugadorActual())){
             System.out.println("Oh no " + getJugadorActual().getNombre() + " ,estas en bancarrota! D:");
-            for (Property_21142512_IgnacioTapia propiedad : getJugadorActual().getPropiedades()){
-                propiedad.setDuenio("Banco");
+            manejoHipotecas(getJugadorActual());
+            if (getJugadorActual().getDinero() <= 0){
+                for (Property_21142512_IgnacioTapia propiedad : getJugadorActual().getPropiedades()){
+                    propiedad.setDuenio("Banco");
+                    propiedad.setEstaHipotecada(false);
+                }
+                getJugadorActual().getPropiedades().clear();
+                listaJugadores.remove(getJugadorActual());
+                if (turnoActual >= listaJugadores.size()){
+                    turnoActual = 0;
+                }
+                avanzarTurno();
             }
-            getJugadorActual().getPropiedades().clear();
-            listaJugadores.remove(getJugadorActual());
-            if (turnoActual >= listaJugadores.size()){
-                turnoActual = 0;
-            }
-            avanzarTurno();
         }
         if (listaJugadores.size() == 1){
             return false;
         }
-        avanzarTurno();
         return true;
     }
+
+    /**
+     * Avanza un turno dentro del jugarTurno
+     * se creo para no saturar incluso mas a la funcion antes mencionada
+     */
     public void avanzarTurno(){
         if (listaJugadores.isEmpty()) return;
         turnoActual = (turnoActual + 1) % listaJugadores.size();
@@ -456,11 +595,6 @@ public class Game_21142512_IgnacioTapia{
      * @return dinero actual en el banco
      */
     public int getDineroBanco() { return dineroBanco; }
-    /**
-     * getter del numero total de dados en el juego
-     * @return numero de dados en juego
-     */
-    public int getNumeroDados() { return numeroDados; }
     /**
      * getter del turno actual del juego
      * @return turno en cuestion
@@ -483,58 +617,36 @@ public class Game_21142512_IgnacioTapia{
     public int getMaximoHoteles() { return maximoHoteles; }
 
     /**
-     * cambia la posicion y estado del jugador al de la carcel en juego
-     * @param jugadorCarcel jugador que se movera a la carcel
-     */
-    public void casillaCarcel(Player_21142512_IgnacioTapia jugadorCarcel, CasillasEspeciales casillaCarcel){
-        jugadorCarcel.setPosicion(casillaCarcel.getPosCasillaEspecial());
-        jugadorCarcel.setEnCarcel(true);
-    }
-
-    /**
-     * funcion que permite cobrar los impuestos una vez el jugador pasa por la salida
-     * @param jugadorSalida jugador X al que se le cobran los impuestos
-     */
-    public void casillaSalida(Player_21142512_IgnacioTapia jugadorSalida){
-        int totalPrecioProp = 0;
-        for (Property_21142512_IgnacioTapia propiedad : jugadorSalida.getPropiedades()){
-            totalPrecioProp += propiedad.getPrecio();
-        }
-        int impuestoMonto = (totalPrecioProp * tasaImpuesto) / 100;
-        jugadorSalida.setDinero(jugadorSalida.getDinero() - impuestoMonto);
-        dineroBanco += impuestoMonto;
-        System.out.println("El impuesto a pagar es de: " + impuestoMonto);
-        System.out.println("El SII se a encargado de cobrar el monto exacto!");
-        System.out.println("Ahora mismo dispones de: " + jugadorSalida.getDinero() + " unidades monetarias");
-    }
-    public void casillaSuerte(Player_21142512_IgnacioTapia jugadorSuerte){
-        for (Card_21142512_IgnacioTapia carta: listaCartas){
-            if (carta instanceof CartasSuerte){
-                Card_21142512_IgnacioTapia cartaExtraida = tablero.extraerCarta();
-                cartaExtraida.ejecutarAccion(getJugadorActual(),this);
-                System.out.println(cartaExtraida.getDescCarta());
-                break;
-            }
-        }
-    }
-    public void casillaComunidad(Player_21142512_IgnacioTapia jugadorComunidad){
-        for (Card_21142512_IgnacioTapia carta : listaCartas){
-            if (carta instanceof CartasComunidad){
-                Card_21142512_IgnacioTapia cartaExtraida = tablero.extraerCarta();
-                cartaExtraida.ejecutarAccion(getJugadorActual(),this);
-                System.out.println(cartaExtraida.getDescCarta());
-                break;
-            }
-        }
-    }
-
-    /**
      * setter para la cantidad de dados
      * @param numeroDados cantidad de dados
      */
     public void setNumeroDados(int numeroDados){
         this.numeroDados = numeroDados;
     }
+
+    /**
+     * setter para la tasa de impuesto
+     * @param tasaImpuesto tasa de impuesto a la que se cambia
+     */
+    public void setTasaImpuesto(int tasaImpuesto){ this.tasaImpuesto = tasaImpuesto; }
+
+    /**
+     * setter para el maximo de casas
+     * @param maximoCasas cantidad de casas
+     */
+    public void setMaximoCasas(int maximoCasas) { this.maximoCasas = maximoCasas; }
+
+    /**
+     * setter para el maximo de hoteles
+     * @param maximoHoteles cantidad de hoteles
+     */
+    public void setMaximoHoteles(int maximoHoteles){ this.maximoHoteles = maximoHoteles; }
+
+    /**
+     * setter para el dinero en el banco
+     * @param montoBanco monto a colocar
+     */
+    public void setDineroBanco(int montoBanco){ this.dineroBanco = montoBanco; }
 
     /**
      * busca al dueño de X propiedad, sirve para poder pagar la renta
@@ -589,6 +701,7 @@ public class Game_21142512_IgnacioTapia{
                 return false;
             } else {
                 System.out.println("Mala suerte :(, sigues en la carcel");
+                avanzarTurno();
                 return true;
             }
         } else if (opcion == 3) {
@@ -603,5 +716,43 @@ public class Game_21142512_IgnacioTapia{
         }
         System.out.println("Ninguna opcion fue elegida, sigues en la carcel");
         return true;
+    }
+
+    /**
+     * funcion que maneja la bancarrota, solo para no seguir expandiendo jugarTurno
+     * @param jugadorHipoteca jugador que debe hipotecar
+     */
+    public void manejoHipotecas(Player_21142512_IgnacioTapia jugadorHipoteca){
+        Scanner scanner = new Scanner(System.in);
+        boolean seguirHipotecando = true;
+
+        while(jugadorHipoteca.getDinero() <= 0 && seguirHipotecando){
+            List<Property_21142512_IgnacioTapia> propSinHipotecar = new ArrayList<>();
+            for (Property_21142512_IgnacioTapia prop : jugadorHipoteca.getPropiedades()){
+                if (!prop.isEstaHipotecada()){
+                    propSinHipotecar.add(prop);
+                }
+            }
+            if (propSinHipotecar.isEmpty()){
+                System.out.println("No hay propiedades para hipotecar...");
+                break;
+            }
+            System.out.println("Que propiedad deseas hipotecar?");
+            for (int i=0;i<propSinHipotecar.size();i++){
+                Property_21142512_IgnacioTapia prop = propSinHipotecar.get(i);
+                System.out.println((i+1) + ". " + prop.getNombreProp() + " Precio de la propiedad: "
+                + prop.getPrecio());
+            }
+            System.out.println((propSinHipotecar.size() + 1) + ". Salir (aceptar la realidad)");
+            int opcionJugador = scanner.nextInt();
+            scanner.nextLine();
+            if (opcionJugador >= 1 && opcionJugador <= propSinHipotecar.size()) {
+                jugadorHipoteca.hipotecarPropiedad(propSinHipotecar.get(opcionJugador - 1));
+            } else if (opcionJugador == propSinHipotecar.size() + 1) {
+                seguirHipotecando = false;
+            } else {
+                System.out.println("Opción no valida, por favor, elija una correcta");
+            }
+        }
     }
 }

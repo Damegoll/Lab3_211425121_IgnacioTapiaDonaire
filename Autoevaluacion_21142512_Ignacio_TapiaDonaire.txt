@@ -1,0 +1,34 @@
+Escala
+1 = Funcionamiento completo
+0,75 = Funcionamiento parcialmente completo, con algunos errores o mal funcionamiento en algunos casos
+0,5 = Funcionamiento a medias, solo sirve para casos concretos
+0,25 = Solo sirve para un caso
+0 = No hace nada o no esta implementada
+
+RF1 Clases y estructuras 1
+RF2 Menu interactivo 1
+RF3 TDA Jugador 1
+RF4 TDA Propiedad 1
+RF5 TDA Hotel 1
+RF6 TDA Carta 1
+RF7 TDA CartaComunidad 1
+RF8 TDA CartaSuerte 1
+RF9 TDA Tablero 1
+RF10 TDA Juego 1
+RF10b Imprimir 1
+RF11 Cargar datos iniciales 1
+RF12 Agregar propiedad 1
+RF13 Agregar jugador 1
+RF14 Obtener jugador actual 1
+RF15 Lanzar dados 1
+RF16 Mover jugador 1
+RF17 Comprar propiedad 1
+RF18 Calcular renta propiedad 1
+RF19 Calcular renta jugador 1
+RF19 Construir casa 1
+RF20 Construir hotel 1
+RF21 Pagar renta 1
+RF22 Hipotecar Propiedad 1
+RF23 Extraer carta 1
+RF24 Verificar bancarrota 1
+RF25 Jugar turno 1

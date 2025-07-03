@@ -23,11 +23,13 @@ public class MenuGame implements Menu {
         String opcionJugadorEleccion;
 
         System.out.println("Bienvenido a Capitalia!, por favor, elige una de las opciones");
+        System.out.println("La cantidad predeterminada de casas es 4, la de hoteles 1 y los dados 2");
         System.out.println("1. Iniciar Partida");
         System.out.println("2. Agregar jugador a la partida");
         System.out.println("3. Establecer la cantidad de dados");
-        System.out.println("4. Mostrar estado actual del juego");
-        System.out.println("5. Salir del Juego");
+        System.out.println("4. Establecer maximo de casas y hoteles");
+        System.out.println("5. Mostrar estado actual del juego");
+        System.out.println("6. Salir del Juego");
         opcionJugadorMenu = scanner.nextInt();
 
 
@@ -50,6 +52,7 @@ public class MenuGame implements Menu {
                 boolean seguirJuego = true;
                 do {
                     seguirJuego = juego.jugarTurno();
+                    entreTurno(juego.getJugadorActual());
                     if (!seguirJuego){
                         System.out.println("Todos los demas jugadores quedaron en bancarrota, Ganaste!");
                         System.out.println("Felicitaciones a " + juego.getJugadorActual() + " ! ");
@@ -85,11 +88,23 @@ public class MenuGame implements Menu {
                 }
                 menuJuego();
                 break;
-            case 4:
+            case 5:
+                juego.cargarDatosIniciales();
                 juego.imprimir();
                 menuJuego();
                 break;
-            case 5:
+            case 4:
+                System.out.println("Cuanto sera el maximo de casas?: ");
+                int cantidadGeneral = scanner.nextInt();
+                juego.setMaximoCasas(cantidadGeneral);
+                System.out.println("El maximo de casas es ahora de: " + cantidadGeneral);
+                System.out.println("Cuanto sera el maximo de hoteles?: ");
+                cantidadGeneral = scanner.nextInt();
+                juego.setMaximoHoteles(cantidadGeneral);
+                System.out.println("El maximo de hoteles es ahora de: " + cantidadGeneral);
+                menuJuego();
+                break;
+            case 6:
                 System.out.println("Saliendo del juego...");
                 break;
             default:
@@ -98,5 +113,32 @@ public class MenuGame implements Menu {
                 break;
         }
         scanner.close();
+    }
+
+    /**
+     * funcion que permite pasar al siguiente turno o ver las estadisticas en el momento
+     * es realmente el entre tiempo de los turnos
+     * @param jugador jugador que interactua con el "menu"
+     */
+    public void entreTurno(Player_21142512_IgnacioTapia jugador){
+        Scanner scanner = new Scanner(System.in);
+        boolean continuar = false;
+        while (!continuar){
+            System.out.println("Que desea hacer?");
+            System.out.println("1. Pasar al siguiente turno");
+            System.out.println("2. Ver mis estadisticas actuales");
+            System.out.println("3. Mostrar estado actual del juego");
+            int opcion = scanner.nextInt();
+            scanner.nextLine();
+            if (opcion == 1){
+                juego.avanzarTurno();
+                continuar = true;
+                break;
+            } else if (opcion == 2){
+                jugador.mostrarEstadisticas();
+            } else if (opcion == 3){
+                juego.imprimir();
+            }
+        }
     }
 }

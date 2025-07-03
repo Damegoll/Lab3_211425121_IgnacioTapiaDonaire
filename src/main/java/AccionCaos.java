@@ -4,6 +4,7 @@ public class AccionCaos implements AccionCarta{
      * en el caso de no tener casas en ninguna propiedad, estas retornan al banco
      * las propiedades retornadas al banco NO provocan que su costo vuelva
      * al usuario, lo pierde para siempre sin más
+     * al parecer tambien reinicia a la cantidad default las casas y hoteles
      * @param jugador jugador que activa el efecto
      * @param juego juego del cual sale la carta que provoca el efecto
      */
@@ -29,6 +30,9 @@ public class AccionCaos implements AccionCarta{
                     }
                 }
             }
+        }
+        for (Player_21142512_IgnacioTapia jugadores : juego.getListaJugadores()){
+            jugadores.getPropiedades().removeIf(prop -> prop.getDuenio().equals("Banco"));
         }
     }
 }
